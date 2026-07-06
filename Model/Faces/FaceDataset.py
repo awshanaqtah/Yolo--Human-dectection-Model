@@ -1,4 +1,5 @@
 import csv
+import os
 import random
 from pathlib import Path
 
@@ -7,8 +8,8 @@ import torch
 from PIL import Image
 from torch.utils.data import Dataset
 
-RepoRoot = Path(__file__).resolve().parents[2]
-ManifestPath = RepoRoot / "datasets" / "processed" / "faces_manifest.csv"
+DataRoot = Path(os.environ["FACE_DATA_ROOT"]) if os.environ.get("FACE_DATA_ROOT") else Path(__file__).resolve().parents[2]
+ManifestPath = DataRoot / "datasets" / "processed" / "faces_manifest.csv"
 ImageSize = 224
 GenderToIndex = {"male": 0, "female": 1}
 ImageNetMean = np.array([0.485, 0.456, 0.406], dtype=np.float32)
@@ -27,7 +28,7 @@ class FaceGenderAgeDataset(Dataset):
 
     def __getitem__(self, Index):
         Row = self.Rows[Index]
-        FaceImage = Image.open(RepoRoot / Row["image_path"]).convert("RGB").resize((ImageSize, ImageSize))
+        FaceImage = Image.open(DataRoot / Row["image_path"]).convert("RGB").resize((ImageSize, ImageSize))
         if self.UseAugmentation and random.random() < 0.5:
             FaceImage = FaceImage.transpose(Image.FLIP_LEFT_RIGHT)
         NormalizedPixels = (np.asarray(FaceImage, np.float32) / 255.0 - ImageNetMean) / ImageNetStd
