@@ -50,6 +50,11 @@ DATASETS = {
         "dest": "datasets/raw/fer2013",
         "note": "expression   (folders: train/ & test/ -> 7 emotion subfolders)",
     },
+    "rafdb": {
+        "slug": "shuvoalok/raf-db-dataset",
+        "dest": "datasets/raw/rafdb",
+        "note": "expression   (real color aligned faces; DATASET/{train,test}/{1-7})",
+    },
 }
 
 
