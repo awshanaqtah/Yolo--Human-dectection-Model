@@ -1,15 +1,23 @@
-# --- Core (model + data loading) ---
+# --- Core (models, data loading, inference) ---
 numpy>=1.24
 torch>=2.0
 torchvision>=0.15
 Pillow>=10.0
 tqdm>=4.65
 
-# --- Data download (Kaggle API) ---
+# --- Data: Kaggle download + HuggingFace hosting ---
 kaggle>=1.6
+huggingface_hub>=0.20
 
-# --- Cloud training on Modal A100 (added when we get to training) ---
-# modal>=0.63
+# --- Detector wrapper (DetectAndClassify.py) ---
+ultralytics>=8.3         # YOLO object detection (person vs animal)
+opencv-python>=4.8       # image I/O + drawing
+facenet-pytorch          # MTCNN face detection -- install with --no-deps so it
+                         # doesn't downgrade your torch (it pins an old one)
+
+# --- Cloud training on Modal A100 ---
+modal>=0.63
+wandb>=0.16
 
 # Note: heavy training runs inside a Modal-defined image with its own pinned
-# deps; this file is mainly for local data-prep + testing the data loaders.
+# deps; this file is for local data-prep, the detector wrapper, and testing.
