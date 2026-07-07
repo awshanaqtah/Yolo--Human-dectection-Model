@@ -5,7 +5,7 @@ Bigger plan is two-stage: detect **human vs animal**, then read attributes off t
 
 ## Models
 - **Model A** — gender + age (UTKFace, ResNet-34)
-- **Model B** — expression (FER-2013) — *next*
+- **Model B** — expression (RAF) 
 
 ## Layout
 ```
